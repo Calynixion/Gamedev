@@ -91,25 +91,33 @@ func _physics_process(_delta):
 	#ground idle
 	if is_on_floor() && not Input.is_action_pressed("move_left") && not Input.is_action_pressed("move_right"):
 		$player_sprite.animation = "idle"
-		$player_sprite.play()
 		
 	#ground L and R
 	if Input.is_action_pressed("move_left") && is_on_floor():
 		$player_sprite.animation = "walk"
-		$player_sprite.play()
 	if Input.is_action_pressed("move_right") && is_on_floor():
 		$player_sprite.animation = "walk"
-		$player_sprite.play()
-		
-	
-	
-	
-	
-	
-	
-	
 
+	#jump + fall + d_jump
+	if !is_on_floor() && velocity.y > 0 && $player_sprite.current_animation != "fall":
+		$player_sprite.animation = "fall"
+	if !is_on_floor() && velocity.y <= 0 && $player_sprite.current_animation != "jump":
+		$player_sprite.animation = "jump"
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	#play animations only if a looping animation is active
+	if $player_sprite.animation != "jump" or "fall":
+		$player_sprite.play()
 	
 	#apply changes and report values for debugging
 	move_and_slide()

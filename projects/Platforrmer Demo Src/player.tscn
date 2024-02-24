@@ -138,7 +138,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 14.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -204,4 +204,4 @@ shape = SubResource("RectangleShape2D_gr0l5")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6hn2p")
-animation = &"fall"
+animation = &"jump"
