@@ -19,7 +19,7 @@ Basic Animations added
 Changed map and map tileset
 "
 
-[node name="Button" type="Button" parent="."]
+[node name="back" type="Button" parent="."]
 offset_left = 472.0
 offset_top = 504.0
 offset_right = 549.0
@@ -27,4 +27,4 @@ offset_bottom = 554.0
 theme_override_font_sizes/font_size = 30
 text = "Back"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

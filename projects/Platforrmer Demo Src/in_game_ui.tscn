@@ -1,15 +1,58 @@
-[gd_scene format=3 uid="uid://c8xotji0tcgye"]
+[gd_scene load_steps=2 format=3 uid="uid://c8xotji0tcgye"]
+
+[ext_resource type="Script" path="res://in_game_ui.gd" id="1_ilynv"]
 
 [node name="in_game_ui" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 576.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ilynv")
 
-[node name="Button" type="Button" parent="."]
+[node name="tint" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 656.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="reset" type="Button" parent="."]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 38.0
+offset_bottom = 79.0
+focus_neighbor_top = NodePath("../menu")
+focus_neighbor_bottom = NodePath("../exit")
+text = "Reset"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 0
+offset_top = 144.0
+offset_right = 42.0
+offset_bottom = 175.0
+focus_neighbor_top = NodePath("../exit")
+text = "Quit"
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 111.0
+offset_bottom = 127.0
+focus_neighbor_top = NodePath("../reset")
+focus_neighbor_bottom = NodePath("../quit")
+text = "Quit to Menu"
+
+[node name="menu" type="Button" parent="."]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+focus_neighbor_bottom = NodePath("../reset")
 text = "Menu"
+
+[connection signal="pressed" from="reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

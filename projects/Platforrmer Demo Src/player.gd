@@ -1,12 +1,12 @@
 extends CharacterBody2D
-#todo: fix coyote time, add dash+wall jump, set animations
+#todo: add dash+wall jump, set animations
 
 #init variables
-@export var maxSpeed = 210
-@export var accel = 30
-@export var deccel = 40
+@export var maxSpeed = 200
+@export var accel = 1500
+@export var deccel = 2000
 
-@export var gravity = 20
+#@export var gravity = 20
 @export var fallSpeed = 600
 
 @export var jumpForce = -425
@@ -16,110 +16,67 @@ extends CharacterBody2D
 
 @export var d_jumps = 1
 
+@onready var animated_sprite = $player_sprite
+
 var d_jump_count = 1
 var has_jumped = false
 var coyoteTimer = 0
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-#builtin physics function, updates 60 times per second
-func _physics_process(_delta):
-	
+func reset():
 	#reset jumps and timers
 	if is_on_floor():
 		d_jump_count = 0
 		coyoteTimer = 0
 		has_jumped = false
-		
-	#apply gravity and set fall speed cap. Handle Variable jump timer and cap at max. Handle Coyoyte time
-	if !is_on_floor():
+func apply_gravity(delta):
+	#apply gravity and set fall speed cap. Handle Coyote timer
+	if not is_on_floor():
 		coyoteTimer += 1
-		velocity.y += gravity
+		velocity.y += gravity * delta
 		if velocity.y > fallSpeed:
 			velocity.y = fallSpeed
-
+func handle_jump():
 	#main jump + coyoteTime
 	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyoteTimer <= coyoteTime) && has_jumped == false:
 		velocity.y = jumpForce
 		has_jumped = true
-
+	elif Input.is_action_just_released("jump") && !is_on_floor():
+		velocity.y = velocity.y * v_jump_min
 	#double jump
 	if Input.is_action_just_pressed("jump") && !is_on_floor() && coyoteTimer > coyoteTime:
 		if d_jump_count <= (d_jumps - 1):
 			velocity.y = d_jumpForce
 			d_jump_count += 1
-		
-	
-	#variable jump, 
-	if Input.is_action_just_released("jump") && !is_on_floor():
-		velocity.y = velocity.y * v_jump_min
-		velocity.y += gravity
-		if velocity.y > fallSpeed:
-			velocity.y = fallSpeed
-		
-	#Basic L and R below, commented out
-	#var h_direction = Input.get_axis("move_left", "move_right")
-	#velocity.x = maxSpeed * h_direction
-
-	#Main L and R
-	if Input.is_action_pressed("move_right"):
-		$player_sprite.flip_h = false
-		velocity.x += accel
-		if velocity.x >= maxSpeed:
-			velocity.x = maxSpeed
-
-	if Input.is_action_pressed("move_left"):
+func handle_accel(axis, delta):
+	if axis != 0:
+		velocity.x = move_toward(velocity.x, maxSpeed * axis, accel * delta)
+	if axis < 0:
 		$player_sprite.flip_h = true
-		velocity.x -= accel
-		if velocity.x <= -maxSpeed:
-			velocity.x = -maxSpeed
-
-	#set deccelaration
-	if not Input.is_action_pressed("move_left") && velocity.x < 0:
-		velocity.x += deccel
-		if velocity.x > 0:
-			velocity.x = 0
-	if not Input.is_action_pressed("move_right") && velocity.x > 0:
-		velocity.x -= deccel
-		if velocity.x < 0:
-			velocity.x = 0
-
-	#Make character stand still
-	if velocity.x < 4 && velocity.x > -4 && not Input.is_action_pressed("move_left") && not Input.is_action_pressed("move_right"):
-		velocity.x = 0
-	
-	#handle graphics
-	
-	#ground idle
-	if is_on_floor() && not Input.is_action_pressed("move_left") && not Input.is_action_pressed("move_right"):
+func handle_deccel(axis, delta):
+	if axis == 0:
+		velocity.x = move_toward(velocity.x, 0, deccel * delta)
+func handle_animations(axis):
+	if axis > 0:
+		$player_sprite.flip_h = false
+	if axis < 0:
+		$player_sprite.flip_h = true
+	if axis == 0 && is_on_floor() == true: 
 		$player_sprite.animation = "idle"
-		
-	#ground L and R
-	if Input.is_action_pressed("move_left") && is_on_floor():
+	if (axis > 0 or axis < 0) && is_on_floor():
 		$player_sprite.animation = "walk"
-	if Input.is_action_pressed("move_right") && is_on_floor():
-		$player_sprite.animation = "walk"
+	$player_sprite.play()
 
-	#jump + fall + d_jump
-	if !is_on_floor() && velocity.y > 0 && $player_sprite.current_animation != "fall":
-		$player_sprite.animation = "fall"
-	if !is_on_floor() && velocity.y <= 0 && $player_sprite.current_animation != "jump":
-		$player_sprite.animation = "jump"
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	#play animations only if a looping animation is active
-	if $player_sprite.animation != "jump" or "fall":
-		$player_sprite.play()
-	
-	#apply changes and report values for debugging
+#builtin physics function, updates 60 times per second
+func _physics_process(delta):
+	reset()
+	apply_gravity(delta)
+	handle_jump()
+	var Input_axis = Input.get_axis("move_left", "move_right")
+	handle_accel(Input_axis, delta)
+	handle_deccel(Input_axis, delta)
+	handle_animations(Input_axis)
+	#apply physics and report values for debugging
 	move_and_slide()
 	print("velocity = " + str(velocity))
 	print("coyote time = " + str(coyoteTimer))
