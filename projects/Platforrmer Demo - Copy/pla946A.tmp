@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce7p6x50o3k2q"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_7vixk"]
+[ext_resource type="Texture2D" uid="uid://0nro7xv46hbi" path="res://assets/Alucard/Alucard_idle_1.png" id="2_dutvh"]
+[ext_resource type="Script" path="res://player_sprite.gd" id="3_766xs"]
+[ext_resource type="Texture2D" uid="uid://7xc2xt18f5rw" path="res://assets/Alucard/Alucard_idle_2.png" id="3_h3356"]
+[ext_resource type="Texture2D" uid="uid://8j5loatkhlc5" path="res://assets/Alucard/Alucard_idle_3.png" id="4_g8ypk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hn2p"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dutvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h3356")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g8ypk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr0l5"]
+size = Vector2(20, 46)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_7vixk")
+metadata/_edit_group_ = true
+
+[node name="player_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6hn2p")
+animation = &"idle"
+frame_progress = 0.755439
+script = ExtResource("3_766xs")
+
+[node name="player_collision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_gr0l5")
