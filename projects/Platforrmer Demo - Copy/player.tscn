@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ce7p6x50o3k2q"]
+[gd_scene load_steps=64 format=3 uid="uid://ce7p6x50o3k2q"]
 
 [ext_resource type="Script" path="res://scripts/PlayerMain.gd" id="1_jbl2r"]
 [ext_resource type="Texture2D" uid="uid://0nro7xv46hbi" path="res://assets/Alucard/Alucard_idle_1.png" id="2_dutvh"]
@@ -18,17 +18,22 @@
 [ext_resource type="Texture2D" uid="uid://h7xr87mqklst" path="res://assets/Alucard/alucard_fall_5.png" id="6_q27dc"]
 [ext_resource type="Texture2D" uid="uid://dp78xm8kiky4" path="res://assets/Alucard/Alucard_idle_3-5.png" id="7_6pvh7"]
 [ext_resource type="Texture2D" uid="uid://cah3q4l4uwaq5" path="res://assets/Alucard/alucard_fall_6.png" id="7_cv6qj"]
+[ext_resource type="Texture2D" uid="uid://cu7pqtxhgyby0" path="res://assets/Alucard/alucard_dash.png" id="7_gr3nl"]
 [ext_resource type="Texture2D" uid="uid://do1kjomonvign" path="res://assets/Alucard/alucard_fall_7.png" id="8_1aja7"]
 [ext_resource type="Texture2D" uid="uid://bkdwl4j2rynp6" path="res://assets/Alucard/alucard_walk_1.png" id="8_5fj7h"]
 [ext_resource type="Texture2D" uid="uid://b1kwp85ajo060" path="res://assets/Alucard/alucard_jump_1.png" id="8_q0ya0"]
+[ext_resource type="Texture2D" uid="uid://b4q851ilcjbwy" path="res://assets/Alucard/alucard_dash_1.png" id="8_qedub"]
 [ext_resource type="Texture2D" uid="uid://cewjoreforidc" path="res://assets/Alucard/alucard_fall_8.png" id="9_8o1pc"]
 [ext_resource type="Texture2D" uid="uid://bqvplr7v1dp4k" path="res://assets/Alucard/alucard_walk_2.png" id="9_db2tx"]
 [ext_resource type="Texture2D" uid="uid://bjv4w6pnr1adl" path="res://assets/Alucard/alucard_jump_2.png" id="9_wfwf8"]
+[ext_resource type="Texture2D" uid="uid://dp0mftwkvr6ll" path="res://assets/Alucard/alucard_dash_2.png" id="9_wuor8"]
 [ext_resource type="Texture2D" uid="uid://bwe8fagla7nqg" path="res://assets/Alucard/alucard_fall_9.png" id="10_6urow"]
+[ext_resource type="Texture2D" uid="uid://bvqidvj56qyv4" path="res://assets/Alucard/alucard_dash_3.png" id="10_25ft2"]
 [ext_resource type="Texture2D" uid="uid://bjpvkm4id3xyj" path="res://assets/Alucard/alucard_jump_3.png" id="10_bv6ya"]
 [ext_resource type="Texture2D" uid="uid://drma0upkbw530" path="res://assets/Alucard/alucard_walk_3.png" id="10_qw2h6"]
 [ext_resource type="Texture2D" uid="uid://djnrrebao8hwa" path="res://assets/Alucard/alucard_jump_4.png" id="11_mu4ru"]
 [ext_resource type="Texture2D" uid="uid://2heeix1qypvj" path="res://assets/Alucard/alucard_walk_4.png" id="11_oj858"]
+[ext_resource type="Texture2D" uid="uid://cmltiew2kvxi7" path="res://assets/Alucard/alucard_dash_4.png" id="11_xhajf"]
 [ext_resource type="Texture2D" uid="uid://v681n7p2mskr" path="res://assets/Alucard/alucard_walk_5.png" id="12_887nh"]
 [ext_resource type="Texture2D" uid="uid://bya5xx6co5aa5" path="res://assets/Alucard/alucard_walk_6.png" id="13_g5f6b"]
 [ext_resource type="Texture2D" uid="uid://dq3nqlxntwwd0" path="res://assets/Alucard/alucard_walk_7.png" id="14_eypiu"]
@@ -47,6 +52,7 @@
 [ext_resource type="Script" path="res://fall.gd" id="45_v4chl"]
 [ext_resource type="Script" path="res://idle.gd" id="46_6db6q"]
 [ext_resource type="Script" path="res://d_jump.gd" id="47_qp03c"]
+[ext_resource type="Script" path="res://dash.gd" id="53_j2dnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gr0l5"]
 size = Vector2(20, 46)
@@ -73,6 +79,26 @@ animations = [{
 "loop": false,
 "name": &"d_jump",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_gr3nl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qedub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wuor8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_25ft2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xhajf")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -200,6 +226,76 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Animation" id="Animation_fihtp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_mjkpt"]
+resource_name = "d_jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"d_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_kpmvf"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
 [sub_resource type="Animation" id="Animation_hc1qf"]
 resource_name = "idle"
 length = 0.7
@@ -227,21 +323,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_fihtp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("player_sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
 }
 
 [sub_resource type="Animation" id="Animation_t5b0l"]
@@ -302,8 +383,8 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15]
 }
 
-[sub_resource type="Animation" id="Animation_mjkpt"]
-resource_name = "d_jump"
+[sub_resource type="Animation" id="Animation_wjwa2"]
+resource_name = "dash"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -315,7 +396,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"d_jump"]
+"values": [&"dash"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -330,37 +411,11 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_kpmvf"]
-resource_name = "fall"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("player_sprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"fall"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("player_sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hwkvd"]
 _data = {
 "RESET": SubResource("Animation_fihtp"),
 "d_jump": SubResource("Animation_mjkpt"),
+"dash": SubResource("Animation_wjwa2"),
 "fall": SubResource("Animation_kpmvf"),
 "idle": SubResource("Animation_hc1qf"),
 "jump": SubResource("Animation_t5b0l"),
@@ -378,7 +433,7 @@ shape = SubResource("RectangleShape2D_gr0l5")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6hn2p")
-animation = &"walk"
+animation = &"dash"
 frame = 2
 
 [node name="animator" type="AnimationPlayer" parent="."]
@@ -408,4 +463,8 @@ animator = NodePath("../../animator")
 
 [node name="d_jump" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
 script = ExtResource("47_qp03c")
+animator = NodePath("../../animator")
+
+[node name="dash" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("53_j2dnv")
 animator = NodePath("../../animator")

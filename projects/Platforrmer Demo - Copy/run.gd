@@ -21,6 +21,8 @@ func Update(delta:float):
 		state_transition.emit(self, "idle")
 	if player.velocity.y > 0:
 		state_transition.emit(self, "fall")
+	if Input.is_action_just_pressed("dash"):
+		state_transition.emit(self, "dash")
 	
 
 

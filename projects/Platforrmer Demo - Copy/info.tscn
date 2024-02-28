@@ -14,7 +14,8 @@ theme_override_font_sizes/font_size = 35
 text = "Ver 1.3-ER
 Animations working
 And while you might not notice, the engine was completely reworked to a state machine
-Added some information overlays"
+Added some information overlays
+Basic Dash added"
 autowrap_mode = 2
 
 [node name="back" type="Button" parent="."]

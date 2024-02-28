@@ -20,4 +20,3 @@ func Update(delta:float):
 		state_transition.emit(self, "run")
 	if player.velocity.y > 0:
 		state_transition.emit(self, "fall")
-
