@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://sdjhkk355anb"]
+
+[ext_resource type="Script" path="res://Scripts/states.gd" id="1_s5id6"]
+
+[node name="ui" type="Node2D"]
+
+[node name="states" type="Label" parent="."]
+offset_right = 384.0
+offset_bottom = 23.0
+script = ExtResource("1_s5id6")
