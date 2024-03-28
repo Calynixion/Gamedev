@@ -34,7 +34,8 @@ var can_dash = true
 var floating = false
 var dir_locked = false
 
-var can_attack = true
+var has_item = false
+var score = 0
 
 func _physics_process(_delta):
 	direction = Input.get_axis("move_left", "move_right")
@@ -45,8 +46,7 @@ func _physics_process(_delta):
 	update_states()
 	move_and_slide()
 	print(velocity)
-	print(did_jump)
-	print(current_jumps)
+	print(has_item)
 
 func update_states():
 	environment = $environment.current_state

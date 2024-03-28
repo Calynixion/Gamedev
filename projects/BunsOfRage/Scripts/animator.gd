@@ -3,7 +3,7 @@ extends AnimationPlayer
 var player : CharacterBody2D
 @onready var player_sprite = $"../player_sprite"
 @onready var wings_sprite = $"../wings"
-@onready var attack_sprite = $"../attack"
+
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
