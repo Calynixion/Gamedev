@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 @export var animator : AnimationPlayer
+@export var ingredients : Node
 
 var speed = 450
-var accel = 75
-var deccel = 115
+var accel = 150
+var deccel = 230
 
 var jump_velocity = 1000
 var jump_min = 0.4
@@ -35,7 +36,10 @@ var floating = false
 var dir_locked = false
 
 var has_item = false
+var item_id = 0
 var score = 0
+
+@export var respawn_location : Node2D
 
 func _physics_process(_delta):
 	direction = Input.get_axis("move_left", "move_right")
@@ -99,3 +103,10 @@ func _on_dash_float_timeout():
 func _on_coyote_timer_timeout():
 	can_jump = false
 	$coyote_timer.stop()
+
+func respawn():
+	position = respawn_location.position
+	has_item = false
+	item_id = 0
+	for child in ingredients.get_children():
+		child.enable()

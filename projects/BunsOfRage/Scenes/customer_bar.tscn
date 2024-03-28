@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgw8p8xx7e3uy"]
+
+[ext_resource type="Script" path="res://Scripts/customer_bar.gd" id="1_3svy0"]
+[ext_resource type="Texture2D" uid="uid://cb1a73xkb3mhv" path="res://icon.svg" id="1_w5gsi"]
+
+[node name="customer_bar" type="Node2D"]
+script = ExtResource("1_3svy0")
+
+[node name="character" type="Sprite2D" parent="."]
+position = Vector2(224, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_w5gsi")
+
+[node name="bar" type="ColorRect" parent="."]
+offset_left = 160.0
+offset_right = 288.0
+offset_bottom = 48.0
+color = Color(0, 1, 0, 1)
+
+[node name="timer" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 8.0
+offset_right = 288.0
+offset_bottom = 31.0
+
+[node name="order" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 136.0
+offset_right = 200.0
+offset_bottom = 159.0

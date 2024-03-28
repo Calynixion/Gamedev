@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmcbes11qpi0k"]
+
+[ext_resource type="Script" path="res://Scripts/character.gd" id="1_p8jh3"]
+[ext_resource type="Texture2D" uid="uid://cb1a73xkb3mhv" path="res://icon.svg" id="2_ou4kc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p4x86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ou4kc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="character" type="Node2D"]
+script = ExtResource("1_p8jh3")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_p4x86")
+
+[node name="anger_timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="timeout" from="anger_timer" to="." method="_on_anger_timer_timeout"]

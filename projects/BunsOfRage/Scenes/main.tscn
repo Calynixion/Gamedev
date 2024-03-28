@@ -1,60 +1,97 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfl6aveokt340"]
+[gd_scene load_steps=9 format=3 uid="uid://bfl6aveokt340"]
 
-[ext_resource type="PackedScene" uid="uid://bbukoqunhlrt4" path="res://Scenes/platform.tscn" id="1_b81mw"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_g87j2"]
 [ext_resource type="PackedScene" uid="uid://o0of223abkhu" path="res://Scenes/player.tscn" id="1_jyhj1"]
 [ext_resource type="PackedScene" uid="uid://sdjhkk355anb" path="res://Scenes/ui.tscn" id="2_vb8q0"]
+[ext_resource type="PackedScene" uid="uid://punj1qevhjd8" path="res://Scenes/world.tscn" id="3_ll07h"]
 [ext_resource type="PackedScene" uid="uid://e7xnqknr36cv" path="res://Scenes/ingredient.tscn" id="3_wpeex"]
 [ext_resource type="PackedScene" uid="uid://clui2471ru6p8" path="res://Scenes/stove.tscn" id="4_8csp8"]
+[ext_resource type="PackedScene" uid="uid://c5s2jki4g86mc" path="res://Scenes/level_manager.tscn" id="7_i82s8"]
+[ext_resource type="PackedScene" uid="uid://dmcbes11qpi0k" path="res://Scenes/character.tscn" id="7_vg5ra"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_g87j2")
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_jyhj1")]
-position = Vector2(544, 392)
+[node name="Player" parent="." node_paths=PackedStringArray("ingredients", "respawn_location") groups=["Player", "ingredients"] instance=ExtResource("1_jyhj1")]
+position = Vector2(256, 168)
+ingredients = NodePath("../ingredients")
+respawn_location = NodePath("../Respawn")
 
-[node name="platform4" parent="." instance=ExtResource("1_b81mw")]
-position = Vector2(448, 448)
-scale = Vector2(4.53181, 0.0783794)
+[node name="world" parent="." instance=ExtResource("3_ll07h")]
 
-[node name="platform" parent="." instance=ExtResource("1_b81mw")]
-position = Vector2(64, 608)
-scale = Vector2(25.5917, 1)
-
-[node name="platform2" parent="." instance=ExtResource("1_b81mw")]
-position = Vector2(-192, 256)
-scale = Vector2(9.5334, 1.56473)
-
-[node name="platform3" parent="." instance=ExtResource("1_b81mw")]
-position = Vector2(1368, 256)
-scale = Vector2(-10.2528, 1.63512)
-
-[node name="Label" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 208.0
-offset_right = 56.0
-offset_bottom = 231.0
-text = "get ingredients"
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 960.0
-offset_top = 192.0
-offset_right = 1082.0
-offset_bottom = 215.0
-text = "Use Ingredients"
-
-[node name="Label3" type="Label" parent="."]
-offset_left = 464.0
-offset_top = 272.0
-offset_right = 646.0
-offset_bottom = 295.0
-text = "Middle Part will Change"
-
-[node name="ingredient" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_wpeex")]
-position = Vector2(72, 160)
+[node name="ui" parent="." node_paths=PackedStringArray("level_manager", "characters", "player", "main") instance=ExtResource("2_vb8q0")]
+level_manager = NodePath("../level_manager")
+characters = NodePath("../characters")
 player = NodePath("../Player")
+main = NodePath("..")
 
-[node name="stove" parent="." node_paths=PackedStringArray("player", "item") instance=ExtResource("4_8csp8")]
-position = Vector2(1104, 200)
+[node name="customer_bar" parent="ui/bars" index="0" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="customer_bar2" parent="ui/bars" index="1" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="customer_bar3" parent="ui/bars" index="2" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="customer_bar4" parent="ui/bars" index="3" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="customer_bar5" parent="ui/bars" index="4" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="customer_bar6" parent="ui/bars" index="5" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../../characters")
+
+[node name="Respawn" type="Node2D" parent="."]
+position = Vector2(256, 168)
+
+[node name="stove" parent="." node_paths=PackedStringArray("player", "ingredients", "characters") instance=ExtResource("4_8csp8")]
+position = Vector2(1344, 264)
 player = NodePath("../Player")
-item = NodePath("../ingredient")
+ingredients = NodePath("../ingredients")
+characters = NodePath("../characters")
 
-[node name="ui" parent="." instance=ExtResource("2_vb8q0")]
+[node name="level_manager" parent="." instance=ExtResource("7_i82s8")]
+
+[node name="ingredients" type="Node" parent="."]
+
+[node name="ingredient1" parent="ingredients" node_paths=PackedStringArray("player") instance=ExtResource("3_wpeex")]
+position = Vector2(32, 224)
+player = NodePath("../../Player")
+
+[node name="ingredient2" parent="ingredients" node_paths=PackedStringArray("player") instance=ExtResource("3_wpeex")]
+position = Vector2(120, 224)
+player = NodePath("../../Player")
+id = 2
+
+[node name="ingredient3" parent="ingredients" node_paths=PackedStringArray("player") instance=ExtResource("3_wpeex")]
+position = Vector2(40, 544)
+player = NodePath("../../Player")
+id = 3
+
+[node name="ingredient4" parent="ingredients" node_paths=PackedStringArray("player") instance=ExtResource("3_wpeex")]
+position = Vector2(120, 544)
+player = NodePath("../../Player")
+id = 4
+
+[node name="characters" type="Node" parent="."]
+
+[node name="character" parent="characters" instance=ExtResource("7_vg5ra")]
+
+[node name="character2" parent="characters" instance=ExtResource("7_vg5ra")]
+id = 1
+
+[node name="character3" parent="characters" instance=ExtResource("7_vg5ra")]
+id = 2
+
+[node name="character4" parent="characters" instance=ExtResource("7_vg5ra")]
+id = 3
+
+[node name="character5" parent="characters" instance=ExtResource("7_vg5ra")]
+id = 4
+
+[node name="character6" parent="characters" instance=ExtResource("7_vg5ra")]
+id = 5
+
+[editable path="ui"]

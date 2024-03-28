@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn6ixud5k35em"]
+
+[ext_resource type="Texture2D" uid="uid://cb1a73xkb3mhv" path="res://icon.svg" id="1_gntuf"]
+
+[node name="dialouge" type="Node2D"]
+
+[node name="window" type="ColorRect" parent="."]
+offset_top = 608.0
+offset_right = 1440.0
+offset_bottom = 816.0
+color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[node name="portrait" type="Sprite2D" parent="."]
+position = Vector2(96, 712)
+texture = ExtResource("1_gntuf")
+
+[node name="text" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 672.0
+offset_right = 631.0
+offset_bottom = 741.0
+theme_override_font_sizes/font_size = 50
+text = "LOL THIS IS A TEST"

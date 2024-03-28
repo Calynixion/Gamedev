@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://punj1qevhjd8"]
+
+[ext_resource type="PackedScene" uid="uid://bbukoqunhlrt4" path="res://Scenes/platform.tscn" id="1_mxcot"]
+[ext_resource type="PackedScene" uid="uid://bs87b2bo8mm6g" path="res://Scenes/fall_trigger.tscn" id="4_acs67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8atvn"]
+size = Vector2(20, 782.244)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fqpy"]
+size = Vector2(20, 777.131)
+
+[node name="world" type="Node2D"]
+
+[node name="platform3" parent="." instance=ExtResource("1_mxcot")]
+position = Vector2(1248, 320)
+scale = Vector2(4.75913, 1.56473)
+
+[node name="r_border" type="CollisionShape2D" parent="platform3"]
+position = Vector2(50.4294, 181.501)
+shape = SubResource("RectangleShape2D_8atvn")
+
+[node name="l_border" type="CollisionShape2D" parent="platform3"]
+position = Vector2(-272.319, 184.057)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2fqpy")
+
+[node name="platform2" parent="." instance=ExtResource("1_mxcot")]
+position = Vector2(0, 576)
+scale = Vector2(8.01764, 0.74507)
+
+[node name="fall" parent="." instance=ExtResource("4_acs67")]
+position = Vector2(104, -40)
+
+[node name="platform4" parent="." instance=ExtResource("1_mxcot")]
+position = Vector2(0, 256)
+scale = Vector2(4.75913, 0.564731)
