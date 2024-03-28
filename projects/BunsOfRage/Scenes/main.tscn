@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfl6aveokt340"]
+
+[ext_resource type="PackedScene" uid="uid://o0of223abkhu" path="res://Scenes/player.tscn" id="1_jyhj1"]
+[ext_resource type="PackedScene" uid="uid://sdjhkk355anb" path="res://Scenes/ui.tscn" id="2_vb8q0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7e50"]
+size = Vector2(2608.87, 40)
+
+[node name="main" type="Node2D"]
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_jyhj1")]
+position = Vector2(1704, 312)
+metadata/_edit_group_ = true
+
+[node name="ui" parent="Player" instance=ExtResource("2_vb8q0")]
+position = Vector2(-576, -320)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-672, -32)
+scale = Vector2(0.98471, 1)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = 64.0
+offset_top = 440.0
+offset_right = 2673.0
+offset_bottom = 480.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1368.43, 460)
+shape = SubResource("RectangleShape2D_j7e50")
+
+[node name="Update" type="Label" parent="."]
+offset_left = 1968.0
+offset_top = 272.0
+offset_right = 2452.0
+offset_bottom = 321.0
+text = "Ver 1.1_RC
+Coyote Time, double jumps, dash d_jump buffer, variable jump"
