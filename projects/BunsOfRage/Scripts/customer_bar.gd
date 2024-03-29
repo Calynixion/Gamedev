@@ -9,9 +9,6 @@ extends Node2D
 @onready var order = $order
 var done = false
 
-func _ready():
-	disable()
-
 func _process(_delta):
 	for child in characters.get_children():
 		if child.id == id:
@@ -21,7 +18,7 @@ func _process(_delta):
 			update_order(child)
 			if child.done == true:
 				done = true
-				disable()
+				id += 1
 
 
 func update_timer(child):
@@ -29,6 +26,8 @@ func update_timer(child):
 func update_bar(child):
 	if child.is_angry == true:
 		bar.color = Color("#ff0000")
+	if child.is_angry == false:
+		bar.color = Color("#00ff00")
 func update_order(child):
 	order.text = str(child.order)
 

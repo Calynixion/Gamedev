@@ -17,9 +17,10 @@ var count_2 = 0
 var count_3 = 0
 
 func _ready():
-	check_children()
+	pass
 
 func _process(_delta):
+	check_children()
 	check_heal()
 	check_done()
 	check_angry()

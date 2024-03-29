@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgdylffhauyti"]
+
+[ext_resource type="Script" path="res://Scripts/queue_bars.gd" id="1_kneh8"]
+
+[node name="queue_bars" type="Node2D"]
+script = ExtResource("1_kneh8")
+
+[node name="border" type="ReferenceRect" parent="."]
+offset_left = 448.0
+offset_right = 1408.0
+offset_bottom = 128.0
+
+[node name="collection" type="Node" parent="."]

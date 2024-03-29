@@ -38,5 +38,6 @@ func check_orders():
 			if child.is_angry == true:
 				child.is_angry = false
 				child.healed = true
+				child.got_healed.emit(child.id)
 			child.is_angry = false
 			child.done = true

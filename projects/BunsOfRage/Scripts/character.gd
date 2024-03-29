@@ -1,15 +1,17 @@
 extends Node2D
 signal got_angry(character_id)
+signal got_healed(character_id)
 
 var rng = RandomNumberGenerator.new()
 
 @export var id = 0
 
 var is_angry = false
-var order = [rng.randi_range(1, 4), rng.randi_range(1, 4), rng.randi_range(1, 4)]
-var time = rng.randi_range(30, 120)
 var done = false
 var healed = false
+var order = [rng.randi_range(1, 4), rng.randi_range(1, 4), rng.randi_range(1, 4)]
+var time = rng.randi_range(30, 120)
+
 
 @onready var anger_timer = $anger_timer
 

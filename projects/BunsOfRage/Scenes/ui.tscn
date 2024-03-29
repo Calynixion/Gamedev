@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://sdjhkk355anb"]
+[gd_scene load_steps=7 format=3 uid="uid://bglm7tx2x7qlj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_jpdhr"]
 [ext_resource type="Script" path="res://Scripts/states.gd" id="1_s5id6"]
 [ext_resource type="Script" path="res://Scripts/score.gd" id="2_g3kgt"]
 [ext_resource type="PackedScene" uid="uid://bgw8p8xx7e3uy" path="res://Scenes/customer_bar.tscn" id="4_j70c5"]
 [ext_resource type="PackedScene" uid="uid://cn6ixud5k35em" path="res://Scenes/dialouge.tscn" id="5_816fm"]
+[ext_resource type="PackedScene" uid="uid://cgdylffhauyti" path="res://Scenes/queue_bars.tscn" id="6_30tux"]
 
 [node name="ui" type="Node2D"]
 script = ExtResource("1_jpdhr")
@@ -38,31 +39,6 @@ offset_bottom = 87.0
 [node name="customer_bar" parent="bars" instance=ExtResource("4_j70c5")]
 metadata/_edit_group_ = true
 
-[node name="customer_bar2" parent="bars" instance=ExtResource("4_j70c5")]
-position = Vector2(192, 0)
-id = 1
-metadata/_edit_group_ = true
-
-[node name="customer_bar3" parent="bars" instance=ExtResource("4_j70c5")]
-position = Vector2(384, 0)
-id = 2
-metadata/_edit_group_ = true
-
-[node name="customer_bar4" parent="bars" instance=ExtResource("4_j70c5")]
-position = Vector2(576, 0)
-id = 3
-metadata/_edit_group_ = true
-
-[node name="customer_bar5" parent="bars" instance=ExtResource("4_j70c5")]
-position = Vector2(768, 0)
-id = 4
-metadata/_edit_group_ = true
-
-[node name="customer_bar6" parent="bars" instance=ExtResource("4_j70c5")]
-position = Vector2(960, 0)
-id = 5
-metadata/_edit_group_ = true
-
 [node name="healed" type="Label" parent="."]
 offset_left = 448.0
 offset_top = 232.0
@@ -74,3 +50,7 @@ offset_left = 456.0
 offset_top = 192.0
 offset_right = 496.0
 offset_bottom = 215.0
+
+[node name="queue_bars" parent="." instance=ExtResource("6_30tux")]
+
+[editable path="queue_bars"]

@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_g87j2"]
 [ext_resource type="PackedScene" uid="uid://o0of223abkhu" path="res://Scenes/player.tscn" id="1_jyhj1"]
-[ext_resource type="PackedScene" uid="uid://sdjhkk355anb" path="res://Scenes/ui.tscn" id="2_vb8q0"]
+[ext_resource type="PackedScene" uid="uid://bglm7tx2x7qlj" path="res://Scenes/ui.tscn" id="2_vb8q0"]
 [ext_resource type="PackedScene" uid="uid://punj1qevhjd8" path="res://Scenes/world.tscn" id="3_ll07h"]
 [ext_resource type="PackedScene" uid="uid://e7xnqknr36cv" path="res://Scenes/ingredient.tscn" id="3_wpeex"]
 [ext_resource type="PackedScene" uid="uid://clui2471ru6p8" path="res://Scenes/stove.tscn" id="4_8csp8"]
 [ext_resource type="PackedScene" uid="uid://c5s2jki4g86mc" path="res://Scenes/level_manager.tscn" id="7_i82s8"]
-[ext_resource type="PackedScene" uid="uid://dmcbes11qpi0k" path="res://Scenes/character.tscn" id="7_vg5ra"]
+[ext_resource type="Script" path="res://Scripts/characters.gd" id="8_dn6mb"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_g87j2")
 
 [node name="Player" parent="." node_paths=PackedStringArray("ingredients", "respawn_location") groups=["Player", "ingredients"] instance=ExtResource("1_jyhj1")]
-position = Vector2(256, 168)
+position = Vector2(256, 512)
 ingredients = NodePath("../ingredients")
 respawn_location = NodePath("../Respawn")
 
@@ -28,23 +28,15 @@ main = NodePath("..")
 [node name="customer_bar" parent="ui/bars" index="0" node_paths=PackedStringArray("characters")]
 characters = NodePath("../../../characters")
 
-[node name="customer_bar2" parent="ui/bars" index="1" node_paths=PackedStringArray("characters")]
-characters = NodePath("../../../characters")
+[node name="queue_bars" parent="ui" index="8" node_paths=PackedStringArray("characters")]
+characters = NodePath("../../characters")
 
-[node name="customer_bar3" parent="ui/bars" index="2" node_paths=PackedStringArray("characters")]
-characters = NodePath("../../../characters")
-
-[node name="customer_bar4" parent="ui/bars" index="3" node_paths=PackedStringArray("characters")]
-characters = NodePath("../../../characters")
-
-[node name="customer_bar5" parent="ui/bars" index="4" node_paths=PackedStringArray("characters")]
-characters = NodePath("../../../characters")
-
-[node name="customer_bar6" parent="ui/bars" index="5" node_paths=PackedStringArray("characters")]
-characters = NodePath("../../../characters")
+[node name="border" parent="ui/queue_bars" index="0"]
+border_color = Color(0, 0, 0, 1)
+border_width = 5.0
 
 [node name="Respawn" type="Node2D" parent="."]
-position = Vector2(256, 168)
+position = Vector2(256, 512)
 
 [node name="stove" parent="." node_paths=PackedStringArray("player", "ingredients", "characters") instance=ExtResource("4_8csp8")]
 position = Vector2(1344, 264)
@@ -75,23 +67,9 @@ position = Vector2(120, 544)
 player = NodePath("../../Player")
 id = 4
 
-[node name="characters" type="Node" parent="."]
-
-[node name="character" parent="characters" instance=ExtResource("7_vg5ra")]
-
-[node name="character2" parent="characters" instance=ExtResource("7_vg5ra")]
-id = 1
-
-[node name="character3" parent="characters" instance=ExtResource("7_vg5ra")]
-id = 2
-
-[node name="character4" parent="characters" instance=ExtResource("7_vg5ra")]
-id = 3
-
-[node name="character5" parent="characters" instance=ExtResource("7_vg5ra")]
-id = 4
-
-[node name="character6" parent="characters" instance=ExtResource("7_vg5ra")]
-id = 5
+[node name="characters" type="Node" parent="." node_paths=PackedStringArray("bars")]
+script = ExtResource("8_dn6mb")
+bars = NodePath("../ui/queue_bars")
 
 [editable path="ui"]
+[editable path="ui/queue_bars"]
